@@ -8,6 +8,7 @@ import "./style.css"
 export default function App(){
     const [data, setData] = React.useState([])
     const [startQuiz, setStartQuiz] = React.useState(false)
+    const [loadQuiz, setLoadQuiz] = React.useState(false)
     const [formData, setFormData] = React.useState("")
     const [score, setScore] = React.useState(0)
     const [isScored, setIsScored] = React.useState(false)
@@ -41,7 +42,7 @@ export default function App(){
     
         getData()  
 
-    }, [startQuiz])
+    }, [loadQuiz])
     
     React.useEffect(() => {
         function scoreAnswers(e){
@@ -75,18 +76,20 @@ export default function App(){
     
     function start(){
         setStartQuiz(true)
+        setLoadQuiz(true)
     }
     
     function restart(){
-        setStartQuiz(false)
         setScore(0)
         setIsScored(false)
         setFormData("")
+        setLoadQuiz(true)
     }
     
     function handleSubmit(e){
         e.preventDefault()
         setIsScored(true)
+        setLoadQuiz(false)
     } 
     
     return (
