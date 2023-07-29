@@ -14,8 +14,8 @@ export default function App(){
     const [isScored, setIsScored] = React.useState(false)
         
     React.useEffect(() => {
-        
-        async function getData(){
+        if(loadQuiz){
+            async function getData(){
             const response = await fetch('https://opentdb.com/api.php?amount=5&difficulty=easy&type=multiple')
             const apiData = await response.json()
             const questionObj = apiData.results.map(item => {
@@ -40,8 +40,9 @@ export default function App(){
             setData(questionObj)
         }
     
-        getData()  
-
+        getData()
+        
+        } 
     }, [loadQuiz])
     
     React.useEffect(() => {
